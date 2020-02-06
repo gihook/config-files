@@ -10,20 +10,28 @@ call vundle#begin()
 set splitbelow
 set splitright
 
+set shiftwidth=4
+set expandtab
+
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'elixir-editors/vim-elixir'
 Plugin 'scrooloose/nerdtree'
-Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'dense-analysis/ale'
 Plugin 'tpope/vim-surround'
 Plugin 'Raimondi/delimitMate'
 Plugin 'sainnhe/edge'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'junegunn/fzf.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+  tnoremap <M-[> <Esc>
+endif
 
 map <c-h> :tabprev<cr>
 map <c-l> :tabnext<cr>
@@ -31,6 +39,7 @@ map <leader>f :FZF<CR>
 map <leader>d :ALEGoToDefinition<CR>
 map <leader>h :ALEHover<CR>
 map <leader>r :ALEFindReferences<CR>
+map <leader>b :Buffers<CR>
 map <C-n> :NERDTreeToggle<CR>
 
 let g:NERDTreeUseSimpleIndicator = 1
