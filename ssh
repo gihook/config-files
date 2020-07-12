@@ -1,0 +1,7 @@
+Host chat
+    User nikola-djukanovic
+    HostName im.rationaletech.com
+    IdentityFile ~/.ssh/id_rsa
+
+Host *
+ServerAliveInterval 120
