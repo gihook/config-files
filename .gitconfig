@@ -1,3 +1,7 @@
 [user]
 	name = Nikola Djukanovic
 	email = nikola.djukanovic@rationaletech.com
+[core]
+	editor = nvim
+[pull]
+	rebase = true

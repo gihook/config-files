@@ -16,14 +16,15 @@ call vundle#begin()
 Plugin 'dense-analysis/ale'
 Plugin 'elixir-editors/vim-elixir'
 Plugin 'HerringtonDarkholme/yats.vim'
+Plugin 'honza/vim-snippets'
 Plugin 'junegunn/fzf.vim'
 Plugin 'mattn/emmet-vim'
-Plugin 'mhartington/nvim-typescript'
 Plugin 'Raimondi/delimitMate'
 Plugin 'sainnhe/edge'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'Shougo/deoplete.nvim'
+Plugin 'SirVer/ultisnips'
 Plugin 'slashmili/alchemist.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
@@ -104,3 +105,11 @@ let g:ale_completion_tsserver_autoimport = 1
 set omnifunc=ale#completion#OmniFunc
 
 let g:deoplete#enable_at_startup = 1
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"

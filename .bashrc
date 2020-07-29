@@ -127,3 +127,5 @@ export PS1;
 
 PS2="\[${yellow}\]→ \[${reset}\]";
 export PS2;
+
+export EDITOR=$(which nvim)
