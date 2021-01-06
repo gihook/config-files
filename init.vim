@@ -1,6 +1,11 @@
 set number
 set rnu
 
+let mapleader = "\<Space>"
+
+set splitbelow
+set splitright
+
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -179,7 +184,7 @@ call plug#end()
 
 colorscheme gruvbox
 
-let mapleader = "\<Space>"
+inoremap <C-u> <esc>bgUwA
 
 nnoremap <leader>ev :vs $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
