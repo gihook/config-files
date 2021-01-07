@@ -1,3 +1,9 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+set laststatus=2
+set statusline=%{FugitiveStatusline()}
+set statusline+=\ \%t,\ \%l/%L\ %P
+
 set number
 set rnu
 
