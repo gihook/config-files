@@ -185,6 +185,7 @@ call plug#begin('~/.vim/plugged')
 :Plug 'tpope/vim-fugitive'
 :Plug 'Raimondi/delimitMate'
 :Plug 'tpope/vim-unimpaired'
+:Plug 'mattn/emmet-vim'
 
 call plug#end()
 
