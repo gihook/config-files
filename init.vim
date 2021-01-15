@@ -178,6 +178,7 @@ call plug#begin('~/.vim/plugged')
 :Plug 'easymotion/vim-easymotion'
 :Plug 'elixir-editors/vim-elixir'
 :Plug 'preservim/nerdtree'
+:Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 :Plug 'junegunn/fzf.vim'
 :Plug 'morhetz/gruvbox'
 :Plug 'tpope/vim-surround'
@@ -186,6 +187,7 @@ call plug#begin('~/.vim/plugged')
 :Plug 'Raimondi/delimitMate'
 :Plug 'tpope/vim-unimpaired'
 :Plug 'mattn/emmet-vim'
+:Plug 'SirVer/ultisnips'
 
 call plug#end()
 
@@ -195,6 +197,9 @@ inoremap <C-u> <esc>bgUwA
 
 nnoremap <leader>ev :vs $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
+vnoremap <C-c> "+y
+inoremap <C-v> <esc>"+pa
 
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
@@ -209,3 +214,10 @@ nnoremap <leader>ff :NERDTreeFind<CR>
 
 nnoremap <leader>fs :Rg<CR>
 nnoremap <leader>b :Buffers<CR>
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
