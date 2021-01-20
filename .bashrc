@@ -129,3 +129,7 @@ PS2="\[${yellow}\]→ \[${reset}\]";
 export PS2;
 
 export EDITOR=$(which nvim)
+
+export PATH="$PATH:/home/[[USER_NAME]]/.dotnet/tools"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

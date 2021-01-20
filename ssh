@@ -3,5 +3,10 @@ Host chat
     HostName im.rationaletech.com
     IdentityFile ~/.ssh/id_rsa
 
+Host azure-chat
+    User rationale
+    HostName 40.91.226.97
+    IdentityFile ~/.ssh/id_rsa
+
 Host *
 ServerAliveInterval 120
