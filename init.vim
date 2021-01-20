@@ -188,12 +188,14 @@ call plug#begin('~/.vim/plugged')
 :Plug 'tpope/vim-unimpaired'
 :Plug 'mattn/emmet-vim'
 :Plug 'SirVer/ultisnips'
+:Plug 'honza/vim-snippets'
+:Plug 'puremourning/vimspector'
 
 call plug#end()
 
 colorscheme gruvbox
 
-inoremap <C-u> <esc>bgUwA
+inoremap <C-u> <esc>bgUwea
 
 nnoremap <leader>ev :vs $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -221,3 +223,5 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+let g:vimspector_enable_mappings = 'HUMAN'
