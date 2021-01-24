@@ -190,6 +190,7 @@ call plug#begin('~/.vim/plugged')
 :Plug 'SirVer/ultisnips'
 :Plug 'honza/vim-snippets'
 :Plug 'puremourning/vimspector'
+:Plug 'aklt/plantuml-syntax'
 :Plug 'weirongxu/plantuml-previewer.vim'
 :Plug 'tyru/open-browser.vim'
 
