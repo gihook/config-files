@@ -1,0 +1,250 @@
+###
+###              ejabberd configuration file
+###
+### The parameters used in this configuration file are explained at
+###
+###       https://docs.ejabberd.im/admin/configuration
+###
+### The configuration file is written in YAML.
+### *******************************************************
+### *******           !!! WARNING !!!               *******
+### *******     YAML IS INDENTATION SENSITIVE       *******
+### ******* MAKE SURE YOU INDENT SECTIONS CORRECTLY *******
+### *******************************************************
+### Refer to http://en.wikipedia.org/wiki/YAML for the brief description.
+### However, ejabberd treats different literals as different types:
+###
+### - unquoted or single-quoted strings. They are called "atoms".
+###   Example: dog, 'Jupiter', '3.14159', YELLOW
+###
+### - numeric literals. Example: 3, -45.0, .0
+###
+### - quoted or folded strings.
+###   Examples of quoted string: "Lizzard", "orange".
+###   Example of folded string:
+###   > Art thou not Romeo,
+###     and a Montague?
+###
+
+new_sql_schema: true
+
+auth_method: [jwt, sql]
+jwt_key: /home/ejabberd/conf/secret.jwk
+jwt_jid_field: xmpp_jid
+auth_password_format: scram
+
+hosts:
+  - "adnoc.mma"
+  - "jabber.mma"
+  - "devchat.rationaletech.com"
+
+loglevel: 4
+log_rotate_size: 10485760
+log_rotate_date: ""
+log_rotate_count: 1
+log_rate_limit: 100
+
+# certfiles:
+#   - "/etc/letsencrypt/live/localhost/fullchain.pem"
+#   - "/etc/letsencrypt/live/localhost/privkey.pem"
+
+define_macro:
+  # TLS options for client not being able to use modern ciphers (Windows XP+, Android 3.0+)
+  CIPHERS_INTERMEDIATE: "ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS"
+  PROTOCOL_OPTIONS_INTERMEDIATE:
+    - "no_sslv2"
+    - "no_sslv3"
+
+  # TLS options for client able to use modern ciphers (Windows 7+, Android 5.0+)
+  CIPHERS_MODERN: "ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256"
+  PROTOCOL_OPTIONS_MODERN:
+    - "no_sslv2"
+    - "no_sslv3"
+    - "no_tlsv1"
+    - "no_tlsv1_1"
+
+c2s_ciphers: CIPHERS_INTERMEDIATE
+c2s_protocol_options: PROTOCOL_OPTIONS_INTERMEDIATE
+
+listen:
+  - port: 5269
+    ip: "::"
+    module: ejabberd_s2s_in
+    max_stanza_size: 524288
+  - port: 5280
+    ip: "::"
+    module: ejabberd_http
+    request_handlers:
+      "/ws": ejabberd_http_ws
+      "/bosh": mod_bosh
+  - port: 5281
+    ip: "::"
+    module: ejabberd_http
+    request_handlers:
+      "/api": mod_http_api
+      "/oauth": ejabberd_oauth
+
+s2s_use_starttls: optional
+
+acl:
+  admin:
+    user:
+      - "admin@localhost"
+      - "admin@devchat.rationaletech.com"
+
+access_rules:
+  local:
+    - allow: local
+  c2s:
+    - deny: blocked
+    - allow
+  announce:
+    - allow: admin
+  configure:
+    - allow: admin
+  muc_create:
+    - allow: local
+  pubsub_createnode:
+    - allow: local
+  register:
+    - allow
+  trusted_network:
+    - allow: loopback
+
+api_permissions:
+  "console commands":
+    from:
+      - ejabberd_ctl
+    who: all
+    what: "*"
+  "admin access":
+    who: admin
+    what:
+      - "*"
+      - "!stop"
+      - "!start"
+  "public commands":
+    who:
+      - acl: loopback
+    what:
+      - "status"
+      - "connected_users_number"
+
+shaper:
+  normal: 50000
+  fast: 50000
+
+shaper_rules:
+  max_user_sessions: 10
+  max_user_offline_messages:
+    - 5000: admin
+    - 100
+  c2s_shaper:
+    - none: admin
+    - normal
+  s2s_shaper: fast
+
+#
+## MSSQL server:
+##
+sql_type: mssql
+sql_server: ""
+sql_database: ""
+sql_username: ""
+sql_password: ""
+sql_port: 24015
+
+modules:
+  mod_adhoc: {}
+  mod_admin_extra: {}
+  mod_announce:
+    access: announce
+  mod_avatar: {}
+  mod_blocking: {}
+  mod_bosh: {}
+  mod_caps: {}
+  mod_carboncopy: {}
+  mod_client_state:
+    queue_presence: true
+    queue_chat_states: true
+  mod_configure: {}
+  mod_disco: {}
+  mod_fail2ban:
+    c2s_auth_ban_lifetime: 1
+    c2s_max_auth_failures: 2000
+  mod_http_api: {}
+  mod_last: {}
+  mod_mam:
+    ## Mnesia is limited to 2GB, better to use an SQL backend
+    ## For small servers SQLite is a good fit and is very easy
+    ## to configure. Uncomment this when you have SQL configured:
+    ## db_type: sql
+    db_type: sql
+    default: always
+  mod_muc:
+    db_type: sql
+    access:
+      - allow
+    access_admin:
+      - allow: admin
+    access_create: muc_create
+    access_persistent: muc_create
+    access_mam:
+      - allow
+    default_room_options:
+      mam: true
+      allow_subscription: true
+      anonymous: false
+      persistent: true
+    history_size: 0
+    preload_rooms: false
+    hibernation_timeout: 30
+  mod_muc_admin: {}
+  mod_offline:
+    access_max_user_messages: max_user_offline_messages
+    store_groupchat: true
+  mod_ping: {}
+  mod_privacy: {}
+  mod_private: {}
+  mod_proxy65:
+    access: local
+    max_connections: 5
+  mod_pubsub:
+    db_type: sql
+    access_createnode: all
+    plugins:
+      - "flat"
+      - "pep"
+    force_node_config:
+      ## Change from "whitelist" to "open" to enable OMEMO support
+      ## See https://github.com/processone/ejabberd/issues/2425
+      "eu.siacs.conversations.axolotl.*":
+        access_model: open
+      ## Avoid buggy clients to make their bookmarks public
+      "storage:bookmarks":
+        access_model: open
+      "test:client:dotnet":
+        access_model: open
+  mod_push: {}
+  mod_push_keepalive: {}
+  mod_register:
+    ## Only accept registration requests from the "trusted"
+    ## network (see access_rules section above).
+    ## Think twice before enabling registration from any
+    ## address. See the Jabber SPAM Manifesto for details:
+    ## https://github.com/ge0rg/jabber-spam-fighting-manifesto
+    ip_access: trusted_network
+  mod_roster:
+    db_type: sql
+  mod_s2s_dialback: {}
+  mod_shared_roster: {}
+  mod_stream_mgmt:
+    resend_on_timeout: if_offline
+  mod_vcard:
+    db_type: sql
+    search: true
+    matches: infinity
+    allow_return_all: true
+  mod_vcard_xupdate: {}
+  mod_version:
+    show_os: false
