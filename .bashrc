@@ -1,9 +1,5 @@
 # .bashrc
 
-# vim keybindings
-set editing-mode vi
-set keymap vi
-
 # User specific environment
 PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 export PATH
@@ -19,7 +15,6 @@ export NVM_DIR="$HOME/.nvm"
 # User specific aliases and functions
 alias vim="nvim"
 alias ll="ls -l"
-alias gco="~/scripts/git-checkout-dmenu.sh"
 
 # prompt
 prompt_git() {
