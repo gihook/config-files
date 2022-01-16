@@ -14,7 +14,8 @@ export NVM_DIR="$HOME/.nvm"
 
 # User specific aliases and functions
 alias vim="nvim"
-alias ll="ls -l"
+alias ls="exa"
+alias ll="exa -l"
 
 # prompt
 prompt_git() {

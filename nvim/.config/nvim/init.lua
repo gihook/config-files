@@ -1,0 +1,5 @@
+require('general-settings')
+require('plugins')
+require('lsp-config')
+require('nvim-tree-settings')
+require('mappings')
