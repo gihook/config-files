@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Installing dotfiles ..."
+rm ~/.bashrc
 
 stew_folders=$(echo */)
 
