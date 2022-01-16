@@ -1,5 +1,6 @@
 #!/bin/bash
 
+touch ~/.bashrc
 rm ~/.bashrc
 
 dir=$(dirname $(echo "$0"))
