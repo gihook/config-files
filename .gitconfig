@@ -3,5 +3,3 @@
 	email = nikoladjukanovic1989@gmail.com
 [core]
 	editor = nvim
-[pull]
-	rebase = true
