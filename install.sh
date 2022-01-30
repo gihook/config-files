@@ -3,6 +3,15 @@
 touch ~/.bashrc
 rm ~/.bashrc
 
+touch ~/.inputrc
+rm ~/.inputrc
+
+touch ~/.ssh/config
+rm ~/.ssh/config
+
+touch ~/.gitconfig
+rm ~/.gitconfig
+
 dir=$(dirname $(echo "$0"))
 
 stow_folders=$(echo */)
