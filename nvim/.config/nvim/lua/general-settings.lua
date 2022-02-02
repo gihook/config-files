@@ -4,6 +4,4 @@ vim.g.mapleader = ' '
 vim.o.splitbelow = true
 vim.o.splitright = true
 
-vim.cmd([[colorscheme material]])
-
-
+vim.cmd([[colorscheme gruvbox]])

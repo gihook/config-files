@@ -1,27 +1,26 @@
 local packer = require('packer')
 
 packer.startup(function()
-  use 'tpope/vim-surround'
-  use 'tpope/vim-commentary'
-  use 'tpope/vim-fugitive'
-  use 'easymotion/vim-easymotion'
-  use 'marko-cerovac/material.nvim'
-  use 'neovim/nvim-lspconfig'
-  use 'williamboman/nvim-lsp-installer'
-  use 'glepnir/lspsaga.nvim'
-  use 'hrsh7th/nvim-cmp'
-
   use {
-    'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    'neoclide/coc.nvim', branch = 'master', run = 'yarn install --frozen-lockfile'
   }
-
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = {
-      'kyazdani42/nvim-web-devicons',
-    },
-    config = function() require'nvim-tree'.setup {} end
+  use  'easymotion/vim-easymotion'
+  use  'preservim/nerdtree'
+  use { 
+    'junegunn/fzf', run = 'fzf#install()'
   }
+  use  'junegunn/fzf.vim'
+  use  'morhetz/gruvbox'
+  use  'tpope/vim-surround'
+  use  'tpope/vim-commentary'
+  use  'tpope/vim-fugitive'
+  use  'Raimondi/delimitMate'
+  use  'tpope/vim-unimpaired'
+  use  'mattn/emmet-vim'
+  use  'SirVer/ultisnips'
+  use  'honza/vim-snippets'
+  use  'puremourning/vimspector'
+  use  'aklt/plantuml-syntax'
+  use  'weirongxu/plantuml-previewer.vim'
 end)
 

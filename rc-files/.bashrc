@@ -16,6 +16,7 @@ export NVM_DIR="$HOME/.nvm"
 alias vim="nvim"
 alias ls="exa"
 alias ll="exa -l"
+alias xclip="xclip -selection clipboard"
 
 # prompt
 prompt_git() {

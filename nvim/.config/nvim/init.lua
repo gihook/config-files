@@ -1,5 +1,3 @@
 require('plugins')
-require('lsp-config')
-require('nvim-tree-settings')
 require('mappings')
 require('general-settings')
