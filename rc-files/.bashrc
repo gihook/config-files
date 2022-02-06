@@ -131,4 +131,4 @@ export PATH="$PATH:/home/[[USER_NAME]]/.dotnet/tools"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-export ~/secrets/environment-variables
+source ~/secrets/environment-variables
