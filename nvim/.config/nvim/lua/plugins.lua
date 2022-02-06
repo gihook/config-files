@@ -6,9 +6,6 @@ packer.startup(function()
   }
   use  'easymotion/vim-easymotion'
   use  'preservim/nerdtree'
-  use { 
-    'junegunn/fzf', run = 'fzf#install()'
-  }
   use  'junegunn/fzf.vim'
   use  'morhetz/gruvbox'
   use  'tpope/vim-surround'
