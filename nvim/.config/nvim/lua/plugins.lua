@@ -6,6 +6,7 @@ packer.startup(function()
   }
   use  'easymotion/vim-easymotion'
   use  'preservim/nerdtree'
+  use { 'junegunn/fzf', run = function() vim.fn['fzf#install()'](0) end }
   use  'junegunn/fzf.vim'
   use  'morhetz/gruvbox'
   use  'tpope/vim-surround'
@@ -18,6 +19,13 @@ packer.startup(function()
   use  'honza/vim-snippets'
   use  'puremourning/vimspector'
   use  'aklt/plantuml-syntax'
+  use  'tyru/open-browser.vim'
   use  'weirongxu/plantuml-previewer.vim'
+
+  use {'nvim-treesitter/nvim-treesitter'}
+  use {'nvim-orgmode/orgmode', config = function()
+        require('orgmode').setup{}
+    end
+  }
 end)
 

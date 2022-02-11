@@ -19,7 +19,7 @@ local function vmap(shortcut, command)
   map("v", shortcut, command)
 end
 
-vmap("<C-c>", '<esc>"+ya')
+vmap("<C-c>", '<esc>"+y')
 imap("<C-v>", '<esc>"+pa')
 
 nmap("<space>sv", ":source $MYVIMRC<cr>")
@@ -34,6 +34,8 @@ nmap("<C-h>", "<C-w>h")
 nmap("<C-j>", "<C-w>j")
 nmap("<C-k>", "<C-w>k")
 nmap("<C-l>", "<C-w>l")
+
+nmap("<C-p>", ":Files<cr>")
 
 nmap("<M-h>", ":tabprev")
 nmap("<M-l>", ":tabnext")
