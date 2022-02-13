@@ -14,9 +14,6 @@ treesitter_config.setup {
   }
 }
 
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-
 require('orgmode').setup({
   org_agenda_files = {'~/Dropbox/org/*', '~/my-orgs/**/*'},
   org_default_notes_file = '~/Dropbox/org/refile.org',
@@ -42,7 +39,7 @@ lsp_installer.on_server_ready(function(server)
     }
   end
 
-  server:setup(opts)
+    server:setup(opts)
 end)
 
 -- Setup nvim-cmp.

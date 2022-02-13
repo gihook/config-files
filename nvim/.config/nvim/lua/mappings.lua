@@ -51,3 +51,5 @@ nmap('gr', ':lua vim.lsp.buf.references()<cr>')
 nmap('K', ':lua vim.lsp.buf.hover()<cr>')
 nmap('<space>ac', ':lua vim.lsp.buf.code_action()<cr>')
 nmap('<space>rn', ':lua vim.lsp.buf.rename()<cr>')
+
+nmap('<space>f', ':lua vim.lsp.buf.formatting_sync()<cr>')
