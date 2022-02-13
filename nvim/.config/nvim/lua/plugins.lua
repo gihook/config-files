@@ -50,5 +50,16 @@ packer.startup(function()
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
+
+  -- status line
+  use({
+    "NTBBloodbath/galaxyline.nvim",
+    -- your statusline
+    config = function()
+      require("galaxyline.themes.eviline")
+    end,
+    -- some optional icons
+    requires = { "kyazdani42/nvim-web-devicons", opt = true }
+  })
 end)
 
