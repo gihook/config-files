@@ -1,9 +1,6 @@
 local packer = require('packer')
 
 packer.startup(function()
-  -- use {
-  --   'neoclide/coc.nvim', branch = 'master', run = 'yarn install --frozen-lockfile'
-  -- }
   -- essentials
   use  'tpope/vim-surround'
   use  'tpope/vim-commentary'
@@ -50,6 +47,9 @@ packer.startup(function()
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
+
+  use 'nvim-lua/plenary.nvim'
+  use 'jose-elias-alvarez/null-ls.nvim'
 
   -- status line
   use({

@@ -127,7 +127,7 @@ export PS2;
 
 export EDITOR=$(which nvim)
 
-export PATH="$PATH:/home/[[USER_NAME]]/.dotnet/tools"
+export PATH="$PATH:/home/nikola/.dotnet/tools:/home/nikola/.cargo/bin"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
