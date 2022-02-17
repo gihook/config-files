@@ -36,13 +36,6 @@ packer.startup(function()
 
 	use({ "nvim-treesitter/nvim-treesitter" })
 
-	use({
-		"nvim-orgmode/orgmode",
-		config = function()
-			require("orgmode").setup({})
-		end,
-	})
-
 	-- LSP
 	use({
 		"neovim/nvim-lspconfig",
@@ -70,4 +63,5 @@ packer.startup(function()
 	})
 
 	use("norcalli/nvim-colorizer.lua")
+	use("savq/melange")
 end)

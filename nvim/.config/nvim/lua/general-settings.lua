@@ -7,4 +7,4 @@ vim.o.tabstop = 4
 vim.o.termguicolors = true
 
 -- set colorscheme
-vim.cmd([[colorscheme gruvbox]])
+vim.cmd([[colorscheme melange]])

@@ -27,6 +27,15 @@ lsp_installer.on_server_ready(function(server)
 		}
 	end
 
+	-- if server.name == "omnisharp" then
+	-- 	local pid = vim.fn.getpid()
+	-- 	local omnisharp_bin = "/home/nikola/.cache/nvim/nvim_lsp/omnisharp"
+
+	-- 	require("lspconfig").omnisharp.setup({
+	-- 		cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
+	-- 	})
+	-- end
+
 	server:setup(opts)
 end)
 
@@ -34,15 +43,15 @@ end)
 local cmp = require("cmp")
 
 cmp.setup({
-	-- snippet = {
-	--   -- REQUIRED - you must specify a snippet engine
-	--   expand = function(args)
-	--     vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-	--     -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-	--     -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-	--     -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-	--   end,
-	-- },
+	snippet = {
+		-- REQUIRED - you must specify a snippet engine
+		expand = function(args)
+			-- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+			-- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+			-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+			vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+		end,
+	},
 	mapping = {
 		["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
 		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
@@ -57,9 +66,8 @@ cmp.setup({
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
 		{ name = "ultisnips" },
-		-- { name = 'luasnip' }, -- For luasnip users.
-	}, {
 		{ name = "buffer" },
+		-- { name = 'luasnip' }, -- For luasnip users.
 	}),
 })
 
