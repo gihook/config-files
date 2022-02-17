@@ -40,6 +40,7 @@ packer.startup(function()
 	use({
 		"neovim/nvim-lspconfig",
 		"williamboman/nvim-lsp-installer",
+		"tami5/lspsaga.nvim",
 	})
 
 	use("hrsh7th/cmp-nvim-lsp")

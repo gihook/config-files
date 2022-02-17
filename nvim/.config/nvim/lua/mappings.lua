@@ -1,22 +1,17 @@
 local function map(mod, shortcut, command)
-  vim.api.nvim_set_keymap(
-    mod,
-    shortcut,
-    command,
-    { noremap = true, silent = true }
-  )
+	vim.api.nvim_set_keymap(mod, shortcut, command, { noremap = true, silent = true })
 end
 
 local function nmap(shortcut, command)
-  map("n", shortcut, command)
+	map("n", shortcut, command)
 end
 
 local function imap(shortcut, command)
-  map("i", shortcut, command)
+	map("i", shortcut, command)
 end
 
 local function vmap(shortcut, command)
-  map("v", shortcut, command)
+	map("v", shortcut, command)
 end
 
 vmap("<C-c>", '<esc>"+y')
@@ -43,13 +38,16 @@ nmap("<M-l>", ":tabnext")
 imap("<C-u>", "<esc>bgUwea")
 
 -- LSP
+nmap("gd", ":lua vim.lsp.buf.definition()<cr>")
+nmap("gD", ":lua vim.lsp.buf.declaration()<cr>")
+nmap("gi", ":lua vim.lsp.buf.implementation()<cr>")
+nmap("gr", ":lua vim.lsp.buf.references()<cr>")
 
-nmap('gd', ':lua vim.lsp.buf.definition()<cr>')
-nmap('gD', ':lua vim.lsp.buf.declaration()<cr>')
-nmap('gi', ':lua vim.lsp.buf.implementation()<cr>')
-nmap('gr', ':lua vim.lsp.buf.references()<cr>')
-nmap('K', ':lua vim.lsp.buf.hover()<cr>')
-nmap('<space>ac', ':lua vim.lsp.buf.code_action()<cr>')
-nmap('<space>rn', ':lua vim.lsp.buf.rename()<cr>')
+nmap("K", ":Lspsaga hover_doc<cr>")
 
-nmap('<space>f', ':lua vim.lsp.buf.formatting_sync()<cr>')
+nmap("gs", ":Lspsaga signature_help<CR>")
+
+nmap("gh", ":Lspsaga lsp_finder<cr>")
+
+nmap("<space>ac", ":Lspsaga code_action <cr>")
+nmap("<space>rn", ":Lspsaga rename<cr>")
