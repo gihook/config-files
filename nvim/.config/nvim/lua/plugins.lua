@@ -52,16 +52,6 @@ packer.startup(function()
 	use("jose-elias-alvarez/null-ls.nvim")
 
 	-- status line
-	use({
-		"NTBBloodbath/galaxyline.nvim",
-		-- your statusline
-		config = function()
-			require("galaxyline.themes.eviline")
-		end,
-		-- some optional icons
-		requires = { "kyazdani42/nvim-web-devicons", opt = true },
-	})
-
-	use("norcalli/nvim-colorizer.lua")
-	use("savq/melange")
+	use("nvim-lualine/lualine.nvim")
+	use("kyazdani42/nvim-web-devicons")
 end)

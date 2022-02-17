@@ -7,4 +7,8 @@ vim.o.tabstop = 4
 vim.o.termguicolors = true
 
 -- set colorscheme
-vim.cmd([[colorscheme melange]])
+vim.cmd([[colorscheme gruvbox]])
+
+require("lualine").setup({
+	options = { theme = "gruvbox" },
+})
