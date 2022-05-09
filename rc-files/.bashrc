@@ -132,3 +132,4 @@ export PATH="$PATH:/home/nikola/.dotnet/tools:/home/nikola/.cargo/bin"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 source ~/secrets/environment-variables
+source ~/scripts/*
