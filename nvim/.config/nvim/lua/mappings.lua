@@ -14,7 +14,7 @@ local function vmap(shortcut, command)
 	map("v", shortcut, command)
 end
 
-vmap("<C-c>", '<esc>"+y')
+vmap("<C-c>", '"+y')
 imap("<C-v>", '<esc>"+pa')
 
 nmap("<space>sv", ":source $MYVIMRC<cr>")

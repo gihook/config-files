@@ -55,4 +55,11 @@ packer.startup(function()
 	-- status line
 	use("nvim-lualine/lualine.nvim")
 	use("kyazdani42/nvim-web-devicons")
+
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+	})
 end)
