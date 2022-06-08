@@ -30,6 +30,15 @@ lsp_installer.on_server_ready(function(server)
 		}
 	end
 
+	if server.name == "jsonls" then
+		opts = {
+			on_attach = function(client)
+				client.resolved_capabilities.document_formatting = false
+				client.resolved_capabilities.document_range_formatting = false
+			end,
+		}
+	end
+
 	-- if server.name == "omnisharp" then
 	-- 	local pid = vim.fn.getpid()
 	-- 	local omnisharp_bin = "/home/nikola/.cache/nvim/nvim_lsp/omnisharp"
