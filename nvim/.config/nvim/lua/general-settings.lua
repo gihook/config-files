@@ -5,6 +5,7 @@ vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.tabstop = 4
 vim.o.termguicolors = true
+vim.o.ignorecase = true
 
 -- set colorscheme
 vim.cmd([[colorscheme gruvbox]])
