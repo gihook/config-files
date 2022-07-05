@@ -81,7 +81,7 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "ultisnips" },
 		{ name = "buffer" },
-		-- { name = 'luasnip' }, -- For luasnip users.
+		-- { name = "luasnip" }, -- For luasnip users.
 	}),
 })
 
@@ -126,7 +126,6 @@ null_ls.setup({
 			filetypes = { "html", "json", "yaml", "markdown", "typescript", "javascript" },
 		}),
 		null_ls.builtins.formatting.stylua,
-		null_ls.builtins.completion.spell,
 	},
 	on_attach = function(client)
 		if client.resolved_capabilities.document_formatting then
