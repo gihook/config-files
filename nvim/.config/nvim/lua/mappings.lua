@@ -49,5 +49,7 @@ nmap("gs", ":Lspsaga signature_help<CR>")
 
 nmap("gh", ":Lspsaga lsp_finder<cr>")
 
+nmap("<space>fa", ":lua vim.lsp.buf.format()<cr>")
+
 nmap("<space>ac", ":Lspsaga code_action <cr>")
 nmap("<space>rn", ":Lspsaga rename<cr>")
