@@ -24,8 +24,8 @@ lsp_installer.on_server_ready(function(server)
 	if server.name == "tsserver" then
 		opts = {
 			on_attach = function(client)
-				client.resolved_capabilities.document_formatting = false
-				client.resolved_capabilities.document_range_formatting = false
+				client.server_capabilities.document_formatting = false
+				client.server_capabilities.document_range_formatting = false
 			end,
 		}
 	end
@@ -33,20 +33,11 @@ lsp_installer.on_server_ready(function(server)
 	if server.name == "jsonls" then
 		opts = {
 			on_attach = function(client)
-				client.resolved_capabilities.document_formatting = false
-				client.resolved_capabilities.document_range_formatting = false
+				client.server_capabilities.document_formatting = false
+				client.server_capabilities.document_range_formatting = false
 			end,
 		}
 	end
-
-	-- if server.name == "omnisharp" then
-	-- 	local pid = vim.fn.getpid()
-	-- 	local omnisharp_bin = "/home/nikola/.cache/nvim/nvim_lsp/omnisharp"
-
-	-- 	require("lspconfig").omnisharp.setup({
-	-- 		cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
-	-- 	})
-	-- end
 
 	server:setup(opts)
 end)
@@ -118,23 +109,30 @@ require("lspconfig")["sumneko_lua"].setup({
 })
 
 -- null-ls setup
-local null_ls = require("null-ls")
-null_ls.setup({
-	debug = true,
+
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+require("null-ls").setup({
 	sources = {
-		null_ls.builtins.formatting.prettier.with({
+		require("null-ls").builtins.formatting.stylua,
+		require("null-ls").builtins.formatting.csharpier,
+		require("null-ls").builtins.diagnostics.eslint,
+		require("null-ls").builtins.completion.spell,
+		require("null-ls").builtins.formatting.prettier.with({
 			filetypes = { "html", "json", "yaml", "markdown", "typescript", "javascript" },
 		}),
-		null_ls.builtins.formatting.stylua,
 	},
-	on_attach = function(client)
-		if client.resolved_capabilities.document_formatting then
-			vim.cmd([[
-            augroup LspFormatting
-                autocmd! * <buffer>
-                autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
-            augroup END
-            ]])
+	-- you can reuse a shared lspconfig on_attach callback here
+	on_attach = function(client, bufnr)
+
+		if client.supports_method("textDocument/formatting") then
+			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				group = augroup,
+				buffer = bufnr,
+				callback = function()
+					vim.lsp.buf.format({ bufnr = bufnr })
+				end,
+			})
 		end
 	end,
 })
