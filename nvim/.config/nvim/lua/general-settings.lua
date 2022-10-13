@@ -7,7 +7,6 @@ vim.o.tabstop = 4
 vim.o.termguicolors = true
 vim.o.ignorecase = true
 vim.o.cursorline = true
-vim.o.cursorcolumn = true
 
 -- nvim-tree related
 -- disable netrw at the very start of your init.lua (strongly advised)
