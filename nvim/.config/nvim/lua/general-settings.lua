@@ -7,6 +7,11 @@ vim.o.tabstop = 4
 vim.o.termguicolors = true
 vim.o.ignorecase = true
 
+-- nvim-tree related
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- set colorscheme
 vim.cmd([[colorscheme gruvbox]])
 
