@@ -15,15 +15,6 @@ packer.startup(function()
 	-- file explorer
 	use("preservim/nerdtree")
 
-	-- fzf
-	use({
-		"junegunn/fzf",
-		run = function()
-			vim.fn["fzf#install()"](0)
-		end,
-	})
-	use("junegunn/fzf.vim")
-
 	-- debugging
 	use("puremourning/vimspector")
 
@@ -61,5 +52,12 @@ packer.startup(function()
 		run = function()
 			vim.fn["mkdp#util#install"]()
 		end,
+	})
+
+	use({
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.0",
+		-- or                            , branch = '0.1.x',
+		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 end)

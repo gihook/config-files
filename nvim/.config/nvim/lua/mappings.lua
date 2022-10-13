@@ -22,15 +22,18 @@ nmap("<space>ev", ":vs $MYVIMRC<cr>")
 
 nmap("<C-n>", ":NERDTreeToggle<cr>")
 nmap("<space>ff", ":NERDTreeFind<cr>")
-nmap("<space>fs", ":Rg<cr>")
-nmap("<space>b", ":Buffers<cr>")
+-- nmap("<space>fs", ":Rg<cr>")
+nmap("<space>fs", ":lua require('telescope.builtin').live_grep()<cr>")
+-- nmap("<space>b", ":Buffers<cr>")
+nmap("<space>b", ":lua require('telescope.builtin').buffers()<cr>")
 
 nmap("<C-h>", "<C-w>h")
 nmap("<C-j>", "<C-w>j")
 nmap("<C-k>", "<C-w>k")
 nmap("<C-l>", "<C-w>l")
 
-nmap("<C-p>", ":Files<cr>")
+-- nmap("<C-p>", ":Files<cr>")
+nmap("<C-p>", ":lua require('telescope.builtin').find_files()<cr>")
 
 nmap("<M-h>", ":tabprev")
 nmap("<M-l>", ":tabnext")

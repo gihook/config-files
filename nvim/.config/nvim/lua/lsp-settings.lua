@@ -116,14 +116,12 @@ require("null-ls").setup({
 		require("null-ls").builtins.formatting.stylua,
 		require("null-ls").builtins.formatting.csharpier,
 		require("null-ls").builtins.diagnostics.eslint,
-		require("null-ls").builtins.completion.spell,
-		require("null-ls").builtins.formatting.prettier.with({
+		require("null-ls").builtins.formatting.prettierd.with({
 			filetypes = { "html", "json", "yaml", "markdown", "typescript", "javascript" },
 		}),
 	},
 	-- you can reuse a shared lspconfig on_attach callback here
 	on_attach = function(client, bufnr)
-
 		if client.supports_method("textDocument/formatting") then
 			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 			vim.api.nvim_create_autocmd("BufWritePre", {
