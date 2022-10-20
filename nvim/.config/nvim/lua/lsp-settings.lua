@@ -1,3 +1,4 @@
+local util = require("lspconfig.util")
 local saga = require("lspsaga")
 saga.init_lsp_saga()
 
@@ -21,12 +22,18 @@ lsp_installer.on_server_ready(function(server)
 		}
 	end
 
-	if server.name == "tsserver" then
+	-- if server.name == "tsserver" then
+	-- 	opts = {
+	-- 		on_attach = function(client)
+	-- 			client.server_capabilities.document_formatting = false
+	-- 			client.server_capabilities.document_range_formatting = false
+	-- 		end,
+	-- 	}
+	-- end
+
+	if server.name == "angularls" then
 		opts = {
-			on_attach = function(client)
-				client.server_capabilities.document_formatting = false
-				client.server_capabilities.document_range_formatting = false
-			end,
+			root_dir = util.root_pattern("project.json", "angular.json"),
 		}
 	end
 
