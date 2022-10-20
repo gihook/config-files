@@ -22,14 +22,13 @@ lsp_installer.on_server_ready(function(server)
 		}
 	end
 
-	-- if server.name == "tsserver" then
-	-- 	opts = {
-	-- 		on_attach = function(client)
-	-- 			client.server_capabilities.document_formatting = false
-	-- 			client.server_capabilities.document_range_formatting = false
-	-- 		end,
-	-- 	}
-	-- end
+	if server.name == "tsserver" then
+		opts = {
+			on_attach = function(client)
+				client.server_capabilities.documentFormattingProvider = false
+			end,
+		}
+	end
 
 	if server.name == "angularls" then
 		opts = {
@@ -40,8 +39,7 @@ lsp_installer.on_server_ready(function(server)
 	if server.name == "jsonls" then
 		opts = {
 			on_attach = function(client)
-				client.server_capabilities.document_formatting = false
-				client.server_capabilities.document_range_formatting = false
+				client.server_capabilities.documentFormattingProvider = false
 			end,
 		}
 	end
