@@ -12,6 +12,8 @@ packer.startup(function()
 	use("SirVer/ultisnips")
 	use("honza/vim-snippets")
 
+	use("mhinz/vim-mix-format")
+
 	-- file explorer
 	-- use("preservim/nerdtree")
 	use({
