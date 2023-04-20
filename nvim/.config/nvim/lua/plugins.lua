@@ -15,7 +15,6 @@ packer.startup(function()
 	use("mhinz/vim-mix-format")
 
 	-- file explorer
-	-- use("preservim/nerdtree")
 	use({
 		"nvim-tree/nvim-tree.lua",
 		requires = {
