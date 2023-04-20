@@ -13,7 +13,6 @@ packer.startup(function()
 	use("honza/vim-snippets")
 
 	-- file explorer
-	-- use("preservim/nerdtree")
 	use({
 		"nvim-tree/nvim-tree.lua",
 		requires = {
