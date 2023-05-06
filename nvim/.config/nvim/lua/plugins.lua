@@ -68,4 +68,6 @@ packer.startup(function()
 		-- or                            , branch = '0.1.x',
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
+
+	use("lervag/vimtex")
 end)
