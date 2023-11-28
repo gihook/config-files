@@ -35,10 +35,14 @@ packer.startup(function()
 
 	use({ "nvim-treesitter/nvim-treesitter" })
 
+	use("williamboman/mason.nvim")
+
 	-- LSP
 	use({
-		"neovim/nvim-lspconfig",
-		"williamboman/nvim-lsp-installer",
+		-- "neovim/nvim-lspconfig",
+		-- "williamboman/nvim-lsp-installer",
+		--
+		"williamboman/mason-lspconfig.nvim",
 		"tami5/lspsaga.nvim",
 	})
 

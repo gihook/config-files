@@ -2,131 +2,8 @@ local util = require("lspconfig.util")
 local saga = require("lspsaga")
 saga.init_lsp_saga()
 
-local lsp_installer = require("nvim-lsp-installer")
-lsp_installer.on_server_ready(function(server)
-	local opts = {}
-
-	if server.name == "sumneko_lua" then
-		opts = {
-			settings = {
-				Lua = {
-					diagnostics = {
-						globals = { "vim", "use" },
-					},
-					--workspace = {
-					-- Make the server aware of Neovim runtime files
-					--library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
-					--}
-				},
-			},
-		}
-	end
-
-	if server.name == "tsserver" then
-		opts = {
-			on_attach = function(client)
-				client.server_capabilities.documentFormattingProvider = false
-			end,
-		}
-	end
-
-	if server.name == "angularls" then
-		opts = {
-			root_dir = util.root_pattern("project.json", "angular.json"),
-		}
-	end
-
-	if server.name == "jsonls" then
-		opts = {
-			on_attach = function(client)
-				client.server_capabilities.documentFormattingProvider = false
-			end,
-		}
-	end
-
-	if server.name == "omnisharp" then
-		opts = {
-			on_attach = function(client)
-				client.server_capabilities.semanticTokensProvider = {
-					full = vim.empty_dict(),
-					legend = {
-						tokenModifiers = { "static_symbol" },
-						tokenTypes = {
-							"comment",
-							"excluded_code",
-							"identifier",
-							"keyword",
-							"keyword_control",
-							"number",
-							"operator",
-							"operator_overloaded",
-							"preprocessor_keyword",
-							"string",
-							"whitespace",
-							"text",
-							"static_symbol",
-							"preprocessor_text",
-							"punctuation",
-							"string_verbatim",
-							"string_escape_character",
-							"class_name",
-							"delegate_name",
-							"enum_name",
-							"interface_name",
-							"module_name",
-							"struct_name",
-							"type_parameter_name",
-							"field_name",
-							"enum_member_name",
-							"constant_name",
-							"local_name",
-							"parameter_name",
-							"method_name",
-							"extension_method_name",
-							"property_name",
-							"event_name",
-							"namespace_name",
-							"label_name",
-							"xml_doc_comment_attribute_name",
-							"xml_doc_comment_attribute_quotes",
-							"xml_doc_comment_attribute_value",
-							"xml_doc_comment_cdata_section",
-							"xml_doc_comment_comment",
-							"xml_doc_comment_delimiter",
-							"xml_doc_comment_entity_reference",
-							"xml_doc_comment_name",
-							"xml_doc_comment_processing_instruction",
-							"xml_doc_comment_text",
-							"xml_literal_attribute_name",
-							"xml_literal_attribute_quotes",
-							"xml_literal_attribute_value",
-							"xml_literal_cdata_section",
-							"xml_literal_comment",
-							"xml_literal_delimiter",
-							"xml_literal_embedded_expression",
-							"xml_literal_entity_reference",
-							"xml_literal_name",
-							"xml_literal_processing_instruction",
-							"xml_literal_text",
-							"regex_comment",
-							"regex_character_class",
-							"regex_anchor",
-							"regex_quantifier",
-							"regex_grouping",
-							"regex_alternation",
-							"regex_text",
-							"regex_self_escaped_character",
-							"regex_other_escape",
-						},
-					},
-					range = true,
-				}
-			end,
-		}
-	end
-
-	server:setup(opts)
-end)
+require("mason").setup()
+require("mason-lspconfig").setup()
 
 -- Setup nvim-cmp.
 local cmp = require("cmp")
@@ -192,6 +69,117 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protoc
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 require("lspconfig")["lua_ls"].setup({
 	capabilities = capabilities,
+})
+
+--require("lspconfig")["sumneko_lua"].setup({
+--	capabilities = capabilities,
+--	settings = {
+--		Lua = {
+--			diagnostics = {
+--				globals = { "vim", "use" },
+--			},
+--			--workspace = {
+--			-- Make the server aware of Neovim runtime files
+--			--library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
+--			--}
+--		},
+--	},
+--})
+
+require("lspconfig")["tsserver"].setup({
+	capabilities = capabilities,
+	on_attach = function(client)
+		client.server_capabilities.documentFormattingProvider = false
+	end,
+})
+
+require("lspconfig")["angularls"].setup({
+	root_dir = util.root_pattern("project.json", "angular.json"),
+})
+
+require("lspconfig")["jsonls"].setup({
+	on_attach = function(client)
+		client.server_capabilities.documentFormattingProvider = false
+	end,
+})
+
+require("lspconfig")["omnisharp"].setup({
+	on_attach = function(client)
+		client.server_capabilities.semanticTokensProvider = {
+			full = vim.empty_dict(),
+			legend = {
+				tokenModifiers = { "static_symbol" },
+				tokenTypes = {
+					"comment",
+					"excluded_code",
+					"identifier",
+					"keyword",
+					"keyword_control",
+					"number",
+					"operator",
+					"operator_overloaded",
+					"preprocessor_keyword",
+					"string",
+					"whitespace",
+					"text",
+					"static_symbol",
+					"preprocessor_text",
+					"punctuation",
+					"string_verbatim",
+					"string_escape_character",
+					"class_name",
+					"delegate_name",
+					"enum_name",
+					"interface_name",
+					"module_name",
+					"struct_name",
+					"type_parameter_name",
+					"field_name",
+					"enum_member_name",
+					"constant_name",
+					"local_name",
+					"parameter_name",
+					"method_name",
+					"extension_method_name",
+					"property_name",
+					"event_name",
+					"namespace_name",
+					"label_name",
+					"xml_doc_comment_attribute_name",
+					"xml_doc_comment_attribute_quotes",
+					"xml_doc_comment_attribute_value",
+					"xml_doc_comment_cdata_section",
+					"xml_doc_comment_comment",
+					"xml_doc_comment_delimiter",
+					"xml_doc_comment_entity_reference",
+					"xml_doc_comment_name",
+					"xml_doc_comment_processing_instruction",
+					"xml_doc_comment_text",
+					"xml_literal_attribute_name",
+					"xml_literal_attribute_quotes",
+					"xml_literal_attribute_value",
+					"xml_literal_cdata_section",
+					"xml_literal_comment",
+					"xml_literal_delimiter",
+					"xml_literal_embedded_expression",
+					"xml_literal_entity_reference",
+					"xml_literal_name",
+					"xml_literal_processing_instruction",
+					"xml_literal_text",
+					"regex_comment",
+					"regex_character_class",
+					"regex_anchor",
+					"regex_quantifier",
+					"regex_grouping",
+					"regex_alternation",
+					"regex_text",
+					"regex_self_escaped_character",
+					"regex_other_escape",
+				},
+			},
+			range = true,
+		}
+	end,
 })
 
 -- null-ls setup
