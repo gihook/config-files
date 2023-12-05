@@ -39,12 +39,14 @@ packer.startup(function()
 
 	-- LSP
 	use({
-		-- "neovim/nvim-lspconfig",
-		-- "williamboman/nvim-lsp-installer",
-		--
+		"neovim/nvim-lspconfig",
 		"williamboman/mason-lspconfig.nvim",
 		"tami5/lspsaga.nvim",
 	})
+
+	use("mfussenegger/nvim-dap")
+
+	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
