@@ -355,5 +355,11 @@ dap.configurations.cs = {
 		program = function()
 			return vim.fn.input("Path to dll: ", vim.fn.getcwd(), "file")
 		end,
+		cwd = function()
+			return vim.fn.input("Path to CWD: ", vim.fn.getcwd(), "file")
+		end,
+		env = {
+			ASPNETCORE_ENVIRONMENT = "Development",
+		},
 	},
 }

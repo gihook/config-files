@@ -17,6 +17,7 @@ alias vim="nvim"
 alias ls="exa"
 alias ll="exa -l"
 alias xclip="xclip -selection clipboard"
+alias gco="git branch | fzf | xargs git checkout"
 
 # prompt
 prompt_git() {
