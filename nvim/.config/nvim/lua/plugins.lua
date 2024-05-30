@@ -41,7 +41,14 @@ packer.startup(function()
 	use({
 		"neovim/nvim-lspconfig",
 		"williamboman/mason-lspconfig.nvim",
-		"tami5/lspsaga.nvim",
+	})
+
+	use({
+		"nvimdev/lspsaga.nvim",
+		after = "nvim-lspconfig",
+		config = function()
+			require("lspsaga").setup({})
+		end,
 	})
 
 	use("mfussenegger/nvim-dap")

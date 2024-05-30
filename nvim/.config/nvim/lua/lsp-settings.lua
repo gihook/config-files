@@ -1,6 +1,4 @@
 local util = require("lspconfig.util")
-local saga = require("lspsaga")
-saga.init_lsp_saga()
 
 require("mason").setup()
 require("mason-lspconfig").setup()
