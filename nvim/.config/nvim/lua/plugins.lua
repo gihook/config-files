@@ -23,9 +23,7 @@ packer.startup(function()
 		tag = "nightly", -- optional, updated every week. (see issue #1193)
 	})
 
-	-- debugging
-	use("puremourning/vimspector")
-
+	-- plantuml
 	use("aklt/plantuml-syntax")
 	use("weirongxu/plantuml-previewer.vim")
 	use("tyru/open-browser.vim")
@@ -78,10 +76,8 @@ packer.startup(function()
 
 	use({
 		"nvim-telescope/telescope.nvim",
-		tag = " 0.1.4",
+		tag = "0.1.8",
 		-- or                            , branch = '0.1.x',
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
-
-	use("lervag/vimtex")
 end)
