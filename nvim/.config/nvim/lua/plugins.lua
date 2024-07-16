@@ -45,7 +45,11 @@ packer.startup(function()
 		"nvimdev/lspsaga.nvim",
 		after = "nvim-lspconfig",
 		config = function()
-			require("lspsaga").setup({})
+			require("lspsaga").setup({
+				ui = {
+					code_action = " ",
+				},
+			})
 		end,
 	})
 
