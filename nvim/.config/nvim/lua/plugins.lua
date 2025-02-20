@@ -61,7 +61,6 @@ packer.startup(function()
 	use("hrsh7th/nvim-cmp")
 
 	use("nvim-lua/plenary.nvim")
-	use("jose-elias-alvarez/null-ls.nvim")
 
 	-- status line
 	use("nvim-lualine/lualine.nvim")
@@ -79,5 +78,12 @@ packer.startup(function()
 		tag = "0.1.8",
 		-- or                            , branch = '0.1.x',
 		requires = { { "nvim-lua/plenary.nvim" } },
+	})
+
+	use({
+		"stevearc/conform.nvim",
+		config = function()
+			require("conform").setup()
+		end,
 	})
 end)

@@ -180,31 +180,21 @@ require("lspconfig")["omnisharp"].setup({
 	end,
 })
 
--- null-ls setup
+require("conform").setup({
+	formatters_by_ft = {
+		lua = { "stylua" },
+		-- Conform will run the first available formatter
+		javascript = { "prettierd", "prettier", stop_after_first = true },
+		typescript = { "prettierd", "prettier", stop_after_first = true },
+		cs = { 'csharpier' },
+	}
+})
 
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-require("null-ls").setup({
-	sources = {
-		require("null-ls").builtins.formatting.stylua,
-		require("null-ls").builtins.formatting.csharpier,
-		require("null-ls").builtins.diagnostics.eslint,
-		require("null-ls").builtins.formatting.prettierd.with({
-			filetypes = { "html", "json", "yaml", "markdown", "typescript", "javascript" },
-		}),
-	},
-	-- you can reuse a shared lspconfig on_attach callback here
-	on_attach = function(client, bufnr)
-		if client.supports_method("textDocument/formatting") then
-			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				group = augroup,
-				buffer = bufnr,
-				callback = function()
-					vim.lsp.buf.format({ bufnr = bufnr })
-				end,
-			})
-		end
-	end,
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*",
+    callback = function()
+        require('conform').format()
+    end,
 })
 
 vim.keymap.set("n", "<F5>", function()
