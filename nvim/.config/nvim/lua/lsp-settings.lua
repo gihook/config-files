@@ -84,16 +84,16 @@ require("lspconfig")["lua_ls"].setup({
 --	},
 --})
 
-require("lspconfig")["tsserver"].setup({
+require("lspconfig")["ts_ls"].setup({
 	capabilities = capabilities,
 	on_attach = function(client)
 		client.server_capabilities.documentFormattingProvider = false
 	end,
 })
 
-require("lspconfig")["angularls"].setup({
-	root_dir = util.root_pattern("project.json", "angular.json"),
-})
+-- require("lspconfig")["angularls"].setup({
+-- 	root_dir = util.root_pattern("angular.json", "project.json"),
+-- })
 
 require("lspconfig")["jsonls"].setup({
 	on_attach = function(client)
