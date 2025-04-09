@@ -53,3 +53,8 @@ nmap("<space>fa", ":lua vim.lsp.buf.format()<cr>")
 
 nmap("<space>ac", ":Lspsaga code_action <cr>")
 nmap("<space>rn", ":Lspsaga rename<cr>")
+
+nmap('<space>e', '<cmd>lua vim.diagnostic.open_float()<cr>')
+nmap('[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+nmap(']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+nmap('<space>q', '<cmd>lua vim.diagnostic.setloclist()<cr>')

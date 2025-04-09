@@ -12,8 +12,6 @@ packer.startup(function()
 	use("SirVer/ultisnips")
 	use("honza/vim-snippets")
 
-	use("mhinz/vim-mix-format")
-
 	-- file explorer
 	use({
 		"nvim-tree/nvim-tree.lua",
@@ -49,10 +47,7 @@ packer.startup(function()
 		end,
 	})
 
-	use("mfussenegger/nvim-dap")
 	use({ "nvim-neotest/nvim-nio" })
-
-	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
