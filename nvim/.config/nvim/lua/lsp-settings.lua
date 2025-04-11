@@ -69,20 +69,15 @@ require("lspconfig")["lua_ls"].setup({
 	capabilities = capabilities,
 })
 
---require("lspconfig")["sumneko_lua"].setup({
---	capabilities = capabilities,
---	settings = {
---		Lua = {
---			diagnostics = {
---				globals = { "vim", "use" },
---			},
---			--workspace = {
---			-- Make the server aware of Neovim runtime files
---			--library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
---			--}
---		},
---	},
---})
+require'lspconfig'.intelephense.setup{
+    settings = {
+        intelephense = {
+            files = {
+                maxSize = 5000000; -- Adjust as needed
+            };
+        };
+    };
+}
 
 require("lspconfig")["ts_ls"].setup({
 	capabilities = capabilities,
