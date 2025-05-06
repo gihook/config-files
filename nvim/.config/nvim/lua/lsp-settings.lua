@@ -1,5 +1,3 @@
-local util = require("lspconfig.util")
-
 require("mason").setup()
 require("mason-lspconfig").setup()
 
@@ -96,83 +94,89 @@ require("lspconfig")["jsonls"].setup({
 	end,
 })
 
+local path_to_elixirls = vim.fn.expand("~/.local/share/nvim/mason/packages/elixir-ls/language_server.sh")
+
+vim.lsp.config('elixirls', {
+    cmd = { path_to_elixirls };
+})
+
+require'lspconfig'['elixirls'].setup{
+  filetypes = { 'elixir', 'eelixir', 'heex', 'surface' }
+  -- root_dir = function(bufnr, on_dir)
+  --   local fname = vim.api.nvim_buf_get_name(bufnr)
+  --   local matches = vim.fs.find({ 'mix.exs' }, { upward = true, limit = 2, path = fname })
+  --   local child_or_root_path, maybe_umbrella_path = unpack(matches)
+  --   local root_dir = vim.fs.dirname(maybe_umbrella_path or child_or_root_path)
+
+  --   on_dir(root_dir)
+  -- end,
+}
+
+
 require("lspconfig")["omnisharp"].setup({
-	on_attach = function(client)
-		client.server_capabilities.semanticTokensProvider = {
-			full = vim.empty_dict(),
-			legend = {
-				tokenModifiers = { "static_symbol" },
-				tokenTypes = {
-					"comment",
-					"excluded_code",
-					"identifier",
-					"keyword",
-					"keyword_control",
-					"number",
-					"operator",
-					"operator_overloaded",
-					"preprocessor_keyword",
-					"string",
-					"whitespace",
-					"text",
-					"static_symbol",
-					"preprocessor_text",
-					"punctuation",
-					"string_verbatim",
-					"string_escape_character",
-					"class_name",
-					"delegate_name",
-					"enum_name",
-					"interface_name",
-					"module_name",
-					"struct_name",
-					"type_parameter_name",
-					"field_name",
-					"enum_member_name",
-					"constant_name",
-					"local_name",
-					"parameter_name",
-					"method_name",
-					"extension_method_name",
-					"property_name",
-					"event_name",
-					"namespace_name",
-					"label_name",
-					"xml_doc_comment_attribute_name",
-					"xml_doc_comment_attribute_quotes",
-					"xml_doc_comment_attribute_value",
-					"xml_doc_comment_cdata_section",
-					"xml_doc_comment_comment",
-					"xml_doc_comment_delimiter",
-					"xml_doc_comment_entity_reference",
-					"xml_doc_comment_name",
-					"xml_doc_comment_processing_instruction",
-					"xml_doc_comment_text",
-					"xml_literal_attribute_name",
-					"xml_literal_attribute_quotes",
-					"xml_literal_attribute_value",
-					"xml_literal_cdata_section",
-					"xml_literal_comment",
-					"xml_literal_delimiter",
-					"xml_literal_embedded_expression",
-					"xml_literal_entity_reference",
-					"xml_literal_name",
-					"xml_literal_processing_instruction",
-					"xml_literal_text",
-					"regex_comment",
-					"regex_character_class",
-					"regex_anchor",
-					"regex_quantifier",
-					"regex_grouping",
-					"regex_alternation",
-					"regex_text",
-					"regex_self_escaped_character",
-					"regex_other_escape",
-				},
-			},
-			range = true,
-		}
-	end,
+  cmd = {
+    vim.fn.executable('OmniSharp') == 1 and 'OmniSharp' or 'omnisharp',
+    '-z', -- https://github.com/OmniSharp/omnisharp-vscode/pull/4300
+    '--hostPID',
+    tostring(vim.fn.getpid()),
+    'DotNet:enablePackageRestore=false',
+    '--encoding',
+    'utf-8',
+    '--languageserver',
+  },
+  filetypes = { 'cs', 'vb' },
+  root_markers = { '.sln', '.csproj', 'omnisharp.json', 'function.json' },
+  init_options = {},
+  capabilities = {
+    workspace = {
+      workspaceFolders = false, -- https://github.com/OmniSharp/omnisharp-roslyn/issues/909
+    },
+  },
+  settings = {
+    FormattingOptions = {
+      -- Enables support for reading code style, naming convention and analyzer
+      -- settings from .editorconfig.
+      EnableEditorConfigSupport = true,
+      -- Specifies whether 'using' directives should be grouped and sorted during
+      -- document formatting.
+      OrganizeImports = nil,
+    },
+    MsBuild = {
+      -- If true, MSBuild project system will only load projects for files that
+      -- were opened in the editor. This setting is useful for big C# codebases
+      -- and allows for faster initialization of code navigation features only
+      -- for projects that are relevant to code that is being edited. With this
+      -- setting enabled OmniSharp may load fewer projects and may thus display
+      -- incomplete reference lists for symbols.
+      LoadProjectsOnDemand = nil,
+    },
+    RoslynExtensionsOptions = {
+      -- Enables support for roslyn analyzers, code fixes and rulesets.
+      EnableAnalyzersSupport = nil,
+      -- Enables support for showing unimported types and unimported extension
+      -- methods in completion lists. When committed, the appropriate using
+      -- directive will be added at the top of the current file. This option can
+      -- have a negative impact on initial completion responsiveness,
+      -- particularly for the first few completion sessions after opening a
+      -- solution.
+      EnableImportCompletion = nil,
+      -- Only run analyzers against open files when 'enableRoslynAnalyzers' is
+      -- true
+      AnalyzeOpenDocumentsOnly = nil,
+      -- Enables the possibility to see the code in external nuget dependencies
+      EnableDecompilationSupport = nil,
+    },
+    RenameOptions = {
+      RenameInComments = nil,
+      RenameOverloads = nil,
+      RenameInStrings = nil,
+    },
+    Sdk = {
+      -- Specifies whether to include preview versions of the .NET SDK when
+      -- determining which version to use for project loading.
+      IncludePrereleases = true,
+    },
+  },
 })
 
 require("conform").setup({
