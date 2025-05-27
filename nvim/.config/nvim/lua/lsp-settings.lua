@@ -179,6 +179,8 @@ require("lspconfig")["omnisharp"].setup({
   },
 })
 
+require'lspconfig'.gopls.setup{}
+
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
@@ -187,6 +189,7 @@ require("conform").setup({
 		json = { "prettierd", "prettier", stop_after_first = true },
 		typescript = { "prettierd", "prettier", stop_after_first = true },
 		cs = { 'csharpier' },
+		go = { "gofmt" },
 	}
 })
 
