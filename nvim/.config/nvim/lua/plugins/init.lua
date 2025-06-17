@@ -1,0 +1,103 @@
+return {
+	-- essentials
+	{ "tpope/vim-surround" },
+	{ "tpope/vim-commentary" },
+	{ "easymotion/vim-easymotion" },
+	{ "tpope/vim-fugitive" },
+	{ "Raimondi/delimitMate" },
+	{ "tpope/vim-unimpaired" },
+	{ "mattn/emmet-vim" },
+	{ "SirVer/ultisnips" },
+	{ "honza/vim-snippets" },
+
+	-- file explorer
+	{
+		"nvim-tree/nvim-tree.lua",
+		dependencies = { "nvim-tree/nvim-web-devicons" }, -- optional
+	},
+
+	-- plantuml
+	{ "aklt/plantuml-syntax" },
+	{ "weirongxu/plantuml-previewer.vim" },
+	{ "tyru/open-browser.vim" },
+
+	-- colorscheme
+	{ "morhetz/gruvbox" },
+
+	-- LSP
+	{
+		"mason-org/mason-lspconfig.nvim",
+		opts = {},
+		dependencies = {
+			{ "mason-org/mason.nvim", opts = {} },
+			"neovim/nvim-lspconfig",
+		},
+	},
+
+	{
+		"mason-org/mason.nvim",
+		opts = {},
+	},
+
+	{
+		"nvimdev/lspsaga.nvim",
+		dependencies = { "neovim/nvim-lspconfig" },
+		config = function()
+			require("lspsaga").setup({})
+		end,
+	},
+
+	{ "nvim-neotest/nvim-nio" },
+
+	{ "hrsh7th/cmp-nvim-lsp" },
+	{ "hrsh7th/cmp-buffer" },
+	{ "hrsh7th/cmp-path" },
+	{ "hrsh7th/cmp-cmdline" },
+	{ "hrsh7th/nvim-cmp" },
+
+	{ "nvim-lua/plenary.nvim" },
+
+	-- status line
+	{ "nvim-lualine/lualine.nvim" },
+	{ "kyazdani42/nvim-web-devicons" },
+
+	{
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		build = "cd app && yarn install",
+		init = function()
+			vim.g.mkdp_filetypes = { "markdown" }
+		end,
+		ft = { "markdown" },
+	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		branch = "main",
+		lazy = false,
+		config = function()
+			local configs = require("nvim-treesitter.configs")
+
+			configs.setup({
+				ensure_installed = "all",
+				sync_install = false,
+				highlight = { enable = true },
+				indent = { enable = true },
+				ignore_install = { "haskell", "jsonc" },
+			})
+		end,
+	},
+
+	{
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.8",
+		dependencies = { { "nvim-lua/plenary.nvim" } },
+	},
+
+	{
+		"stevearc/conform.nvim",
+		config = function()
+			require("conform").setup()
+		end,
+	},
+}
