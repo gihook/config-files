@@ -16,9 +16,8 @@ packer.startup(function()
 	use({
 		"nvim-tree/nvim-tree.lua",
 		requires = {
-			"nvim-tree/nvim-web-devicons", -- optional, for file icons
+			"nvim-tree/nvim-web-devicons", -- optional
 		},
-		tag = "nightly", -- optional, updated every week. (see issue #1193)
 	})
 
 	-- plantuml
