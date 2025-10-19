@@ -41,6 +41,12 @@ cmp.setup.filetype("gitcommit", {
 	}),
 })
 
+cmp.setup.filetype("codecompanion", {
+	sources = cmp.config.sources({
+		{ name = "codecompanion" }, -- You can specify the `cmp_git` source if you were installed it.
+	}),
+})
+
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline("/", {
 	sources = {
@@ -60,11 +66,11 @@ cmp.setup.cmdline(":", {
 -- Setup lspconfig.
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-require("lspconfig")["lua_ls"].setup({
+vim.lsp.config("lua_ls", {
 	capabilities = capabilities,
 })
 
-require("lspconfig").intelephense.setup({
+vim.lsp.config("intelephense", {
 	settings = {
 		intelephense = {
 			files = {
@@ -74,18 +80,18 @@ require("lspconfig").intelephense.setup({
 	},
 })
 
-require("lspconfig")["ts_ls"].setup({
+vim.lsp.config("ts_ls", {
 	capabilities = capabilities,
 	on_attach = function(client)
 		client.server_capabilities.documentFormattingProvider = false
 	end,
 })
 
--- require("lspconfig")["angularls"].setup({
+-- vim.lsp.config("angularls", {
 -- 	root_dir = util.root_pattern("angular.json", "project.json"),
 -- })
 
-require("lspconfig")["jsonls"].setup({
+vim.lsp.config("jsonls", {
 	on_attach = function(client)
 		client.server_capabilities.documentFormattingProvider = false
 	end,
@@ -97,7 +103,7 @@ vim.lsp.config("elixirls", {
 	cmd = { path_to_elixirls },
 })
 
-require("lspconfig")["elixirls"].setup({
+vim.lsp.config("elixirls", {
 	filetypes = { "elixir", "eelixir", "heex", "surface" },
 	-- root_dir = function(bufnr, on_dir)
 	--   local fname = vim.api.nvim_buf_get_name(bufnr)
@@ -109,7 +115,7 @@ require("lspconfig")["elixirls"].setup({
 	-- end,
 })
 
-require("lspconfig")["omnisharp"].setup({
+vim.lsp.config("omnisharp", {
 	cmd = {
 		vim.fn.executable("OmniSharp") == 1 and "OmniSharp" or "omnisharp",
 		"-z", -- https://github.com/OmniSharp/omnisharp-vscode/pull/4300
@@ -135,7 +141,7 @@ require("lspconfig")["omnisharp"].setup({
 			EnableEditorConfigSupport = true,
 			-- Specifies whether 'using' directives should be grouped and sorted during
 			-- document formatting.
-			OrganizeImports = nil,
+			OrganizeImports = true,
 		},
 		MsBuild = {
 			-- If true, MSBuild project system will only load projects for files that
@@ -174,8 +180,6 @@ require("lspconfig")["omnisharp"].setup({
 		},
 	},
 })
-
-require("lspconfig").gopls.setup({})
 
 require("conform").setup({
 	formatters_by_ft = {
