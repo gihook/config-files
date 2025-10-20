@@ -1,5 +1,15 @@
 require("codecompanion").setup({
-	strategy = "gemini",
+	strategies = {
+		chat = {
+			adapter = "gemini",
+		},
+		inline = {
+			adapter = "gemini",
+		},
+		cmd = {
+			adapter = "gemini",
+		},
+	},
 	opts = {
 		log_level = "DEBUG",
 	},
@@ -8,13 +18,12 @@ require("codecompanion").setup({
 		enabled = true,
 	},
 	adapters = {
-		gemini = function()
-			return require("codecompanion.adapters").extend("gemini", {
-				model = "gemini-2.5-flash",
-				env = {
-					api_key = "",
-				},
-			})
-		end,
+		http = {
+			gemini = function()
+				return require("codecompanion.adapters").extend("gemini", {
+					model = "gemini-2.5-pro",
+				})
+			end,
+		},
 	},
 })
