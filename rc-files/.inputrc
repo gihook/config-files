@@ -1,3 +1,4 @@
 # vim keybindings
 set editing-mode vi
 set keymap vi
+set completion-ignore-case on

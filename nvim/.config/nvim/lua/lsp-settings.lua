@@ -129,13 +129,6 @@ vim.lsp.config("omnisharp", {
 	filetypes = { "cs", "vb" },
 	root_markers = { ".sln", ".csproj", "omnisharp.json", "function.json" },
 
-	-- This function runs when the LSP client attaches to a buffer
-	on_attach = function(client)
-		-- This line disables semantic highlighting (the "color coding")
-		-- by telling the client to ignore the server's capability.
-		client.server_capabilities.semanticTokensProvider = nil
-	end,
-
 	init_options = {},
 	capabilities = capabilities,
 	settings = {
