@@ -3,3 +3,8 @@
 	email = nikoladjukanovic1989@gmail.com
 [core]
 	editor = nvim
+[alias]
+	st = status
+	s = status
+	a = add
+	c = commit
