@@ -133,3 +133,5 @@ export PATH="$PATH:/home/nikola/.dotnet/tools:/home/nikola/.cargo/bin"
 [[ -f /etc/bash_completion ]] && . /etc/bash_completion
 
 source ~/secrets/environment-variables
+
+eval "$(zoxide init bash)"
