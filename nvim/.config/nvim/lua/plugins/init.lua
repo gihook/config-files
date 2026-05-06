@@ -72,12 +72,13 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
 		build = ":TSUpdate",
 	},
 
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.8",
+		branch = "master",
 		dependencies = { { "nvim-lua/plenary.nvim" } },
 	},
 
@@ -100,7 +101,7 @@ return {
 		opts = {
 			preview = {
 				filetypes = { "markdown", "codecompanion" },
-				ignore_buftypes = {},
+				ignore_buftypes = { "nofile", "prompt" },
 			},
 		},
 	},
