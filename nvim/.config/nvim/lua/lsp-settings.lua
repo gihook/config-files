@@ -186,6 +186,7 @@ require("conform").setup({
 		markdown = { "prettierd", "prettier", stop_after_first = true },
 		json = { "prettierd", "prettier", stop_after_first = true },
 		typescript = { "prettierd", "prettier", stop_after_first = true },
+		c = { "clang-format" },
 		cs = { "csharpier" },
 		go = { "gofmt" },
 	},
