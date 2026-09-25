@@ -178,6 +178,27 @@ vim.lsp.config("omnisharp", {
 	},
 })
 
+-- Pyright / Basedpyright for hover, completions, and type checking
+vim.lsp.config("basedpyright", {
+	capabilities = capabilities,
+	settings = {
+		basedpyright = {
+			analysis = {
+				typeCheckingMode = "basic",
+				autoSearchPaths = true,
+				useLibraryCodeForTypes = true,
+			},
+		},
+	},
+})
+
+-- Ruff for instant linting and code actions
+vim.lsp.config("ruff", {
+	capabilities = capabilities,
+})
+
+vim.lsp.enable({ "basedpyright", "ruff" })
+
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
@@ -189,6 +210,7 @@ require("conform").setup({
 		c = { "clang-format" },
 		cs = { "csharpier" },
 		go = { "gofmt" },
+		python = { "ruff_format" },
 	},
 })
 
